@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aku ada hadiah spesial buat kamuu</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+overflow:hidden;
+font-family:Arial,sans-serif;
+background:#111;
+}
+
+/* Welcome */
+#welcome{
+position:fixed;
+inset:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9ed2,#ffc8e4);
+z-index:10;
+}
+
+#name{
+font-size:60px;
+font-weight:bold;
+color:#fff;
+text-shadow:0 0 20px white;
+}
+
+.sub{
+margin-top:20px;
+font-size:22px;
+color:white;
+}
+
+.btn{
+margin-top:30px;
+padding:15px 35px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+background:white;
+}
+
+/* Garden */
+#garden{
+display:none;
+width:100vw;
+height:100vh;
+position:relative;
+overflow:hidden;
+background:linear-gradient(
+to bottom,
+#87ceeb 0%,
+#bcecff 40%,
+#9be27d 100%
+);
+}
+
+.center{
+position:absolute;
+top:12%;
+left:50%;
+transform:translateX(-50%);
+font-size:55px;
+font-weight:bold;
+color:white;
+text-shadow:
+0 0 10px hotpink,
+0 0 30px hotpink,
+0 0 60px hotpink;
+z-index:5;
+}
+
+/* Stars */
+.star{
+position:absolute;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:.2}
+to{opacity:1}
+}
+
+/* Tulips */
+.tulip{
+position:absolute;
+bottom:80px;
+width:10px;
+height:120px;
+background:#39a84f;
+}
+
+.flower{
+position:absolute;
+top:-28px;
+left:-20px;
+width:50px;
+height:50px;
+background:#ff5ca8;
+border-radius:50%;
+}
+
+/* Grass */
+.grass{
+position:absolute;
+bottom:0;
+width:3px;
+background:green;
+transform-origin:bottom;
+animation:sway 3s infinite alternate;
+}
+
+@keyframes sway{
+from{transform:rotate(-4deg)}
+to{transform:rotate(4deg)}
+}
+
+/* Butterflies */
+.butterfly{
+position:absolute;
+font-size:28px;
+animation:fly 14s linear infinite;
+}
+
+@keyframes fly{
+0%{
+transform:translate(-150px,100px);
+}
+100%{
+transform:translate(120vw,-150px);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="welcome">
+
+<div id="name"></div>
+
+<div class="sub">
+Ada hadiah untuk kamu 🎁
+</div>
+
+<button class="btn" onclick="openGift()">
+💌 Klik Disini
+</button>
+
+</div>
+
+<div id="garden">
+
+<div class="center">
+FLOWERS FOR PRINCESS
+</div>
+
+</div>
+
+<script>
+
+const text="Balqis";
+let i=0;
+let typing=true;
+
+const nameEl=document.getElementById("name");
+
+setInterval(()=>{
+
+if(typing){
+
+i++;
+
+nameEl.innerHTML=text.substring(0,i);
+
+if(i>=text.length){
+typing=false;
+}
+
+}else{
+
+i--;
+
+nameEl.innerHTML=text.substring(0,i);
+
+if(i<=0){
+typing=true;
+}
+
+}
+
+},180);
+
+function openGift(){
+
+document.getElementById("welcome").style.display="none";
+
+const garden=document.getElementById("garden");
+
+garden.style.display="block";
+
+/* Stars */
+for(let i=0;i<80;i++){
+
+let s=document.createElement("div");
+
+s.className="star";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.top=Math.random()*100+"vh";
+
+garden.appendChild(s);
+}
+
+/* Grass */
+for(let i=0;i<250;i++){
+
+let g=document.createElement("div");
+
+g.className="grass";
+
+g.style.left=Math.random()*100+"vw";
+
+g.style.height=(20+Math.random()*40)+"px";
+
+garden.appendChild(g);
+}
+
+/* Tulips */
+for(let i=0;i<18;i++){
+
+let t=document.createElement("div");
+
+t.className="tulip";
+
+t.style.left=(i*5+Math.random()*5)+"vw";
+
+let f=document.createElement("div");
+
+f.className="flower";
+
+t.appendChild(f);
+
+garden.appendChild(t);
+}
+
+/* Butterflies */
+for(let i=0;i<12;i++){
+
+let b=document.createElement("div");
+
+b.className="butterfly";
+
+b.innerHTML="🦋";
+
+b.style.top=Math.random()*70+"vh";
+
+b.style.animationDelay=Math.random()*10+"s";
+
+garden.appendChild(b);
+}
+
+}
+
+</script>
+
+</body>
+</html>
